@@ -289,10 +289,18 @@ $show_hashrate = round($hashrate / 1000,3);
 
 echo "<tr><td class=\"leftheader\">Pool Hash Rate</td><td>". number_format($show_hashrate, 3) . "Mhash/s</td></tr>";
 
+$pending_sharesQ = mysql_fetch_object(mysql_query("SELECT sum(shareCount) as count FROM winning_shares WHERE blockNumber >= (".
+									  "SELECT blockNumber FROM networkBlocks WHERE confirms != '' AND confirms < 120 ".
+									   "ORDER BY blockNumber ASC LIMIT 1)"));
+			$pending_shares = $pending_sharesQ->count;
+			if ($pending_shares) { $nextblock_shares = ($totalOverallShares - $pending_shares); } else { $nextblock_shares = $totalOverallShares; }
+
+echo "<tr><td class=\"leftheader\">Round Shares</td><td> ".(number_format($nextblock_shares))."</td></tr>";
+
 // Enable this for pool efficiency stats to be shown (useless stat imo)
-//$results = mysql_query("SELECT (1 - (SUM(stale_share_count)/SUM(share_count))) * 100 AS efficiency FROM webUsers") or sqlerr(__FILE__, __LINE__);
-//$row = mysql_fetch_object($results);
-//echo "<tr><td class=\"leftheader\">Pool Efficiency</td><td><span class=\"green\">". number_format($row->efficiency, 2) . "%</span></td></tr>";
+$results = mysql_query("SELECT (1 - (SUM(stale_share_count)/SUM(share_count))) * 100 AS efficiency FROM webUsers") or sqlerr(__FILE__, __LINE__);
+$row = mysql_fetch_object($results);
+echo "<tr><td class=\"leftheader\">Pool Efficiency</td><td><span class=\"green\">". number_format($row->efficiency, 2) . "%</span></td></tr>";
 
 $res = mysql_query("SELECT count(webUsers.id) FROM webUsers WHERE hashrate > 0") or sqlerr(__FILE__, __LINE__);
 $row = mysql_fetch_array($res);
@@ -303,7 +311,7 @@ echo "<tr><td class=\"leftheader\">Current Total Miners</td><td>" . number_forma
 
 $current_block_no = $bitcoinController->query("getblockcount");
 
-echo "<tr><td class=\"leftheader\">Next Network Block</td><td><a href=\"http://explorer.litecoin.net/block//" . $current_block_no . "\" target='_new'>";
+echo "<tr><td class=\"leftheader\">Next Network Block</td><td><a href=\"http://explorer.litecoin.net/block/" . $current_block_no . "\" target='_new'>";
 echo number_format($current_block_no + 1) . "</a>";
 
 echo " &nbsp;&nbsp;<font size='1'> (Current: <a href=\"http://explorer.litecoin.net/block/" . $current_block_no . "\" target='_new'>" .(number_format($current_block_no)). ")</font></a></td></tr>";
@@ -327,7 +335,7 @@ $time_last_found;
 		$found_block_no = $resultrow->blockNumber;
 		$confirm_no = $resultrow->confirms;
 
-echo "<tr><td class=\"leftheader\">Last Block Found</td><td><a href=\"http://blockexplorer.com/b/" . $found_block_no . "\" target='_new'>" . number_format($found_block_no) . "</a></td></tr>";
+echo "<tr><td class=\"leftheader\">Last Block Found</td><td><a href=\"http://explorer.litecoin.net/block/" . $found_block_no . "\" target='_new'>" . number_format($found_block_no) . "</a></td></tr>";
 
 		$time_last_found = $resultrow->timestamp;
 
