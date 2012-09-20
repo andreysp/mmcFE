@@ -19,7 +19,7 @@ INSTALL
 
 Deps:
 	- curl
-	- litwcoind
+	- litecoind
 	- pushpool
 	- mysql
 	- php
