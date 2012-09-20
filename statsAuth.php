@@ -446,7 +446,7 @@ while($resultrow = mysql_fetch_object($result)) {
 
 echo "</table>";
 
-echo "</center><ul><li>Note: <font color='orange'>Round Earnings are not credited until 120 confirms.</font></li></ul>";
+echo "</center><ul><li>Note: <font color='orange'>Round Earnings are not credited until 120 confirms!</font></li></ul>";
 ?>
 
 		</p>
