@@ -248,7 +248,7 @@ if ($returnError) { echo "<div class=\"message errormsg\"><p>".antiXss($returnEr
 				<th>Stale</th>
 				<th>Round</th>
 				<th>Don. %</th>
-				<th>GH/s</th>
+				<th>MH/s</th>
 				<th>Stale %</th>
 			</tr>
 			</thead>
