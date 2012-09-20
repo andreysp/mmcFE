@@ -49,7 +49,7 @@
 <div class="block_content" style="padding:10px;">
 <p>
 <ol>
-<li><strong>Create account.</strong> Register <a href="/register.php">here</a>, or login if you already have account</li>
+<li><strong>Create account.</strong> Register <a href="/register">here</a>, or login if you already have account</li>
 
 <li><strong>Download a miner.</strong>
 	<ul>
@@ -86,7 +86,7 @@
 <pre>
 	./minerd --url http://mine.youdomain.net:port --userpass <em>your_username</em>.1:x
 </pre>
-	If you want, you can create additional slaves with usernames and passwords of your choice <a href=accountworkers.php>Here<br></a><br>
+	If you want, you can create additional slaves with usernames and passwords of your choice <a href=accountworkers>Here<br></a><br>
 </li>
 <li><strong>Create a Litecoin address to recieve payments.</strong>
 	<ul>
